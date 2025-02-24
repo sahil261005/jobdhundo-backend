@@ -6,28 +6,29 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const app = express();
-  app.use(
-  cors({
-    origin: "https://jobdhundo-frontend-web.vercel.app/", // Allow requests from Vercel frontend
-    credentials: true, // Allow sending cookies
-  })
-);
+app.use(express.json());
+app.use(cors({
+  origin: "https://jobdhundo-frontend-web.vercel.app", 
+  credentials: true, 
+}));
+
+// Check if backend is running
+app.get("/", (req, res) => {
+  res.send("JOBDHUNDO Backend is running");
+});
 
 // Database Connection
-mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("MongoDB Connected"))
-  .catch((err) => console.log(err));
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log("MongoDB Connected"))
+.catch((err) => console.log(err));
 
 // Import Routes
-const authRoutes = require("./routes/authRoutes");
+const authRoutes = require("./routes/authRoutes"); // Ensure this file exists
 app.use("/api/auth", authRoutes);
 
 const PORT = process.env.PORT || 5000;
-app.get("/", (req, res) => {
-  res.send("JobDhundo Backend is Running!");
-});
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
