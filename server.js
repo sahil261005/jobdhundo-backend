@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL, // Allow requests from Vercel frontend
+    origin: jobdhundo-frontend-web.vercel.app, // Allow requests from Vercel frontend
     credentials: true, // Allow sending cookies
   })
 );
