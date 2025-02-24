@@ -9,11 +9,10 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: jobdhundo-frontend-web.vercel.app, // Allow requests from Vercel frontend
+    origin: "https://jobdhundo-frontend-web.vercel.app", // Allow requests from Vercel frontend
     credentials: true, // Allow sending cookies
   })
 );
-
 
 // Database Connection
 mongoose
