@@ -5,6 +5,10 @@ const bcrypt = require("bcryptjs");
 
 // POST /api/auth/register
 router.post("/register", async (req, res) => {
+  console.log("Register endpoint hit");  // Add this line
+  // ...rest of the code...
+});
+
   const { username, email, password } = req.body;
   try {
     // Check if user exists
