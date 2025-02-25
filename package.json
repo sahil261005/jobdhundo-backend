@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sahil261005/jobdhundo-frontend.git"
+    "url": "git+https://github.com/sahil261005/jobdhundo-backend.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/sahil261005/jobdhundo-frontend/issues"
+    "url": "https://github.com/sahil261005/jobdhundo-backend/issues"
   },
-  "homepage": "https://github.com/sahil261005/jobdhundo-frontend#readme",
+  "homepage": "https://github.com/sahil261005/jobdhundo-backend#readme",
   "description": "",
   "dependencies": {
     "bcryptjs": "^3.0.2",
