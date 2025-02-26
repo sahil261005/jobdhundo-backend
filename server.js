@@ -1,4 +1,4 @@
-require("dotenv").config();  // Load env variables once at the very top
+require("dotenv").config();  // Load env variables at the top
 
 const express = require("express");
 const mongoose = require("mongoose");
@@ -11,7 +11,7 @@ app.use(cors());
 // Database Connection
 mongoose
   .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true, // Though these options are now default, you can remove them if desired
+    useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => console.log("MongoDB Connected"))
@@ -21,6 +21,12 @@ mongoose
 const authRoutes = require("./routes/authRoutes");
 app.use("/api/auth", authRoutes);
 
+// ✅ Fix: Add a Default Route
+app.get("/", (req, res) => {
+  res.send("Server is up and running!");
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
 
