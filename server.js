@@ -6,11 +6,14 @@ const cors = require("cors");
 
 const app = express();
 app.use(express.json());
-app.use(cors({
-  origin: "jobdhundo-frontend-web.vercel.app",
-  methods: "GET,POST,PUT,DELETE",
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: ["https://jobdhundo-frontend-web.vercel.app", "http://localhost:3000"],
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+  })
+);
+
 
 
 // Database Connection
