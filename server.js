@@ -5,12 +5,17 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 
 const app = express();
-app.use(express.json());
 
+// ✅ Enable JSON Parsing
+app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // Support URL-encoded data
+
+// ✅ CORS Configuration (Allow JSON Requests)
 app.use(
   cors({
     origin: ["https://jobdhundo-frontend-web.vercel.app", "https://jobdhundo-backend-1.onrender.com"],
-    methods: "GET,POST,PUT,DELETE",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"], // Ensure JSON headers are allowed
     credentials: true,
   })
 );
@@ -28,6 +33,12 @@ app.use("/api/auth", authRoutes);
 // ✅ Default Route
 app.get("/", (req, res) => {
   res.send("🚀 Server is up and running!");
+});
+
+// ✅ Error Handling Middleware (Debugging)
+app.use((err, req, res, next) => {
+  console.error("❌ Server Error:", err.message);
+  res.status(500).json({ message: "Internal Server Error" });
 });
 
 // ✅ Start Server
