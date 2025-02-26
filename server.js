@@ -28,7 +28,7 @@ mongoose
 
 // ✅ Import Routes
 const authRoutes = require("./routes/authRoutes");
-app.use("/api/auth", authRoutes);
+app.use(authRoutes);
 console.log("✅ authRoutes loaded");
 
 // ✅ Default Route
