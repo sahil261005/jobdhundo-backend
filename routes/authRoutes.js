@@ -9,6 +9,11 @@ console.log("✅ authRoutes loaded"); // Confirming that the file is loaded
 
 // ✅ Register Route
 router.post("/register", async (req, res) => {
+  console.log("🔵 Incoming Register Request:", req.body);
+  res.status(200).json({ message: "Received!" }); // Temporary response
+});
+
+router.post("/register", async (req, res) => {
   try {
     console.log("🔵 Register Attempt:", req.body); // Debugging log
 
@@ -77,3 +82,4 @@ router.post("/login", async (req, res) => {
 });
 
 module.exports = router;
+
