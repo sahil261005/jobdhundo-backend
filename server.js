@@ -1,4 +1,4 @@
-require("dotenv").config();  // Load env variables at the top
+require("dotenv").config(); // Load environment variables
 
 const express = require("express");
 const mongoose = require("mongoose");
@@ -6,14 +6,7 @@ const cors = require("cors");
 
 const app = express();
 app.use(express.json());
-require("dotenv").config();  // Load env variables at the top
 
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-
-const app = express();
-app.use(express.json());
 app.use(
   cors({
     origin: ["https://jobdhundo-frontend-web.vercel.app", "https://jobdhundo-backend-1.onrender.com"],
@@ -22,47 +15,22 @@ app.use(
   })
 );
 
-
-
-
-// Database Connection
+// ✅ Database Connection
 mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB Connected"))
-  .catch((err) => console.log(err));
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
-// Import Routes
+// ✅ Import Routes
 const authRoutes = require("./routes/authRoutes");
 app.use("/api/auth", authRoutes);
 
-// ✅ Fix: Add a Default Route
+// ✅ Default Route
 app.get("/", (req, res) => {
-  res.send("Server is up and running!");
+  res.send("🚀 Server is up and running!");
 });
 
+// ✅ Start Server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-
-
-
-
-// Database Connection
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB Connected"))
-  .catch((err) => console.log(err));
-
-// Import Routes
-const authRoutes = require("./routes/authRoutes");
-app.use("/api/auth", authRoutes);
-
-// ✅ Fix: Add a Default Route
-app.get("/", (req, res) => {
-  res.send("Server is up and running!");
-});
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
+app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
 
