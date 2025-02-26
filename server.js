@@ -6,7 +6,12 @@ const cors = require("cors");
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: "jobdhundo-frontend-web.vercel.app",
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true
+}));
+
 
 // Database Connection
 mongoose
