@@ -10,12 +10,12 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // Support URL-encoded data
 
-// ✅ CORS Configuration (Allow JSON Requests)
+// ✅ CORS Configuration
 app.use(
   cors({
     origin: ["https://jobdhundo-frontend-web.vercel.app", "https://jobdhundo-backend-1.onrender.com"],
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"], // Ensure JSON headers are allowed
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
@@ -29,13 +29,27 @@ mongoose
 // ✅ Import Routes
 const authRoutes = require("./routes/authRoutes");
 app.use("/api/auth", authRoutes);
+console.log("✅ authRoutes loaded");
 
 // ✅ Default Route
 app.get("/", (req, res) => {
   res.send("🚀 Server is up and running!");
 });
 
-// ✅ Error Handling Middleware (Debugging)
+// ✅ Debug: Print All Registered Routes
+app._router.stack.forEach((middleware) => {
+  if (middleware.route) { 
+    console.log(`✅ Route: ${middleware.route.path}`);
+  } else if (middleware.name === 'router') {
+    middleware.handle.stack.forEach((nestedRoute) => {
+      if (nestedRoute.route) {
+        console.log(`✅ Nested Route: ${Object.keys(nestedRoute.route.methods).join(', ').toUpperCase()} ${nestedRoute.route.path}`);
+      }
+    });
+  }
+});
+
+// ✅ Error Handling Middleware
 app.use((err, req, res, next) => {
   console.error("❌ Server Error:", err.message);
   res.status(500).json({ message: "Internal Server Error" });
@@ -43,11 +57,4 @@ app.use((err, req, res, next) => {
 
 // ✅ Start Server
 const PORT = process.env.PORT || 10000;
-app._router.stack.forEach((r) => {
-  if (r.route && r.route.path) {
-    console.log(`✅ Route: ${r.route.path}`);
-  }
-});
-// Ensure fallback port
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
-
