@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true })); // Support URL-encoded data
 // ✅ CORS Configuration
 app.use(
   cors({
-    origin: ["https://jobdhundo-frontend-web.vercel.app", "https://jobdhundo-backend-1.onrender.com"],
+    origin: ["https://jobdhundoweb.vercel.app/", "https://jobdhundo-backend-1.onrender.com"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
