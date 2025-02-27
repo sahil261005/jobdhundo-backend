@@ -40,40 +40,40 @@ router.post("/register", async (req, res) => {
 
 
 // ✅ Login Route
+// ✅ Login Route
 router.post("/login", async (req, res) => {
   try {
-    console.log("🔵 Login Attempt:", req.body); // Debugging log
+    console.log("🔵 Incoming Login Request:", req.body);
 
     const { email, password } = req.body;
 
+    // ✅ Validate input fields
     if (!email || !password) {
+      console.log("❌ Missing email or password:", req.body);
       return res.status(400).json({ message: "❌ Please enter both email and password." });
     }
 
-    // Find user
+    // ✅ Check if user exists
     let user = await User.findOne({ email });
     if (!user) {
       console.log("❌ User not found:", email);
       return res.status(400).json({ message: "❌ User not found." });
     }
 
-    // Check password
+    // ✅ Compare password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       console.log("❌ Invalid password attempt for:", email);
       return res.status(400).json({ message: "❌ Invalid credentials." });
     }
 
-    // Generate Token
+    // ✅ Generate Token
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-    console.log("✅ Login successful:", email);
+    console.log("✅ Login successful:", { email, token });
     res.status(200).json({ message: "✅ Login successful!", token });
   } catch (error) {
     console.error("❌ Login Error:", error);
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(500).json({ message: "❌ Internal Server Error" });
   }
 });
-
-module.exports = router;
-
