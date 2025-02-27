@@ -17,27 +17,26 @@ router.post("/register", async (req, res) => {
       return res.status(400).json({ message: "❌ Please fill all fields." });
     }
 
-    // Check if user exists
     let user = await User.findOne({ email });
     if (user) {
       console.log("❌ User already exists:", email);
       return res.status(400).json({ message: "❌ User already exists." });
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create new user
     user = new User({ username, email, password: hashedPassword });
+    
+    // ✅ Debug log AFTER saving
     await user.save();
+    console.log("✅ User saved to MongoDB:", user); // Debugging
 
-    console.log("✅ User registered successfully:", email);
     res.status(201).json({ message: "✅ Registration successful!" });
   } catch (error) {
     console.error("❌ Register Error:", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
 
 
 // ✅ Login Route
