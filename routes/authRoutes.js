@@ -9,16 +9,10 @@ console.log("✅ authRoutes loaded"); // Confirming that the file is loaded
 
 // ✅ Register Route
 router.post("/register", async (req, res) => {
-  console.log("🔵 Incoming Register Request:", req.body);
-  res.status(200).json({ message: "Received!" }); // Temporary response
-});
-
-router.post("/register", async (req, res) => {
   try {
-    console.log("🔵 Register Attempt:", req.body); // Debugging log
+    console.log("🔵 Register Attempt:", req.body);
 
     const { username, email, password } = req.body;
-
     if (!username || !email || !password) {
       return res.status(400).json({ message: "❌ Please fill all fields." });
     }
@@ -44,6 +38,7 @@ router.post("/register", async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
 
 // ✅ Login Route
 router.post("/login", async (req, res) => {
