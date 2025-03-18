@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const jobs = [
     {
       title: "Frontend Developer",
-      company: "Infosys",
+      company: "Meta",
       location: "Bengaluru, India",
       domain: "Web Development",
     },
