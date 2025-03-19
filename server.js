@@ -52,7 +52,7 @@ app._router.stack.forEach((middleware) => {
 // ✅ Error Handling Middleware
 app.use((err, req, res, next) => {
   console.error("❌ Server Error:", err.message);
-  res.status(500).json({ message: "Internal Server Error" });
+  res.status(500).json({ message: "Internal Server Errors" });
 });
 
 // ✅ Start Server
