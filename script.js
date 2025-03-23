@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       title: "Cyber Security Analyst",
       company: "L&T Infotech",
-      location: "New Delhi, India",
+      location: "Pune, India",
       domain: "Cyber Security",
     },
     {
