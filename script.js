@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     {
       title: "Backend Developer",
-      company: "T",
+      company: "TCS",
       location: "Mumbai, India",
       domain: "Web Development",
     },
