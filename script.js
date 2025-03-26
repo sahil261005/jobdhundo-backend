@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       title: "Full Stack Developer",
       company: "Wipro",
-      location: "Hyderabad,",
+      location: "Hyderabad, India",
       domain: "Web Development",
     },
     {
